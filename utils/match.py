@@ -1,4 +1,5 @@
 from annoy import AnnoyIndex
+import os
 
 class Annoy(object):
 
@@ -12,6 +13,7 @@ class Annoy(object):
         for i, x in enumerate(X):
             self._annoy.add_item(i, x.tolist())
         self._annoy.build(self._n_trees, n_jobs=-1)
+        self._annoy.save("item.ann.index")
 
     def set_query_arguments(self, search_k):
         self._search_k = search_k
