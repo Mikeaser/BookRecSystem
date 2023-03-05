@@ -1,6 +1,9 @@
-/data/**
-/model/saved
+#  原始数据存放点
+/data/raw/**    
+#  程序运行生成的分析数据
+/data/processed/**   
 demo.ipynb
 __pycache__
 item.ann.index
 .**
+/temp/**
