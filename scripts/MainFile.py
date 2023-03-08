@@ -13,13 +13,13 @@ from utils.recall import topn_evaluate
 
 
 
-def main(ProjectFolderDir, DataDir, neg_ratio, min_item, seq_max_len, load, batch_size, user_params, item_params, 
+def main(ProjectFolderDir, neg_ratio, min_item, seq_max_len, load, batch_size, user_params, item_params, 
             temperature, learning_rate, weight_decay, optimizer_fn, epoch, topk):
     import time
     start_time = str(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
     logfile_name = str(time.strftime('%Y_%m_%d_%H_%M_%S',time.localtime(time.time())))
     print('Start:', start_time)
-    save_dir = '.'  # 项目文件夹路径(推荐)
+    save_dir = ProjectFolderDir  # 项目文件夹路径(推荐)
     
     model_dir = save_dir + '/model/saved/'    # 模型及embedding向量保存路径
     datapath = save_dir + '/data/processed/ZJULibrary2013_2019.csv'
@@ -101,7 +101,6 @@ if __name__ == '__main__':
     torch.cuda.manual_seed_all(seed)
     main(
         ProjectFolderDir = '',
-        DataDir = '',
         neg_ratio= 3 ,
         min_item= 5 ,
         seq_max_len= 10 ,
