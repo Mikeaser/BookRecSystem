@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append('.')
+
 from utils.data import datapretreat, MatchDataGenerator
 from utils.features import SequenceFeature, SparseFeature
 from model.DSSM import DSSM
@@ -6,6 +10,7 @@ from utils.train import MatchTrainer
 import numpy as np
 import random
 from utils.recall import topn_evaluate
+
 
 
 def main(neg_ratio, min_item, seq_max_len, load, batch_size, user_params, item_params, 
@@ -17,7 +22,7 @@ def main(neg_ratio, min_item, seq_max_len, load, batch_size, user_params, item_p
     save_dir = '.'  # 项目文件夹路径(推荐)
     
     model_dir = save_dir + '/model/saved/'    # 模型及embedding向量保存路径
-    datapath = save_dir + '/data/ZJULibrary2019.csv'
+    datapath = save_dir + '/data/processed/ZJULibrary2013_2019.csv'
     user_features = ['PATRON_ID', 'STUDENT_GRADE', 'PATRON_DEPT', 'PATRON_TYPE']
     # 用户侧特征       用户id          年级            学生学院       学生类型
     item_features = ['ITEM_ID', 'SUBLIBRARY', 'CALLNO1','CALLNO2', 'PUBLISH_YEAR', 'AUTHOR', 'TITLE', 'PRESS']
@@ -101,7 +106,7 @@ if __name__ == '__main__':
         load= False , 
         batch_size= 2048 ,
         user_params= [512, 512, 256, 128, 64] ,
-        item_params= [512, 512, 256, 128, 64] ,
+        item_params= [1024, 512, 256, 128, 64] ,
         temperature= 0.02 ,
         learning_rate= 0.01 ,
         weight_decay= 1e-4 ,

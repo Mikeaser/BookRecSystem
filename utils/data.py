@@ -42,7 +42,7 @@ def gen_model_input(df, user_profile, user_col, item_profile, item_col, seq_max_
 class datapretreat(object):
 
     def __init__(self, save_dir, datapath, user_features,item_features, time, user_col, item_col):
-        self.savepath = save_dir + '/data/saved/'
+        self.savepath = save_dir + '/data/processed/'
         self.datapath = datapath
         self.user_features = user_features
         self.item_features = item_features
@@ -52,10 +52,7 @@ class datapretreat(object):
         self.item_col = item_col
 
     def data_load(self):
-        data = pd.read_csv(self.datapath, encoding='utf8', dtype=str)
-        data = data.fillna(value='na')
-        data['CALLNO1'] = data['ITEM_CALLNO'].str.split('/', expand=True)[0].map(lambda x: get_Bletter(str(x)))
-        data['CALLNO2'] = data['ITEM_CALLNO'].str.split('/', expand=True)[1].map(lambda x: get_Bletter(str(x)))
+        data = pd.read_csv(self.datapath, encoding='utf8', dtype=str, nrows = 1000)
         data[self.time]=data[self.time].astype(int)
         return data[self.features+[self.time]]
 

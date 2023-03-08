@@ -1,8 +1,13 @@
+import sys
+
+sys.path.append('.')
+
 import torch
 from utils.match import Annoy
 import numpy as np
 import argparse
 from annoy import AnnoyIndex
+
 
 #  部分观看书本不足的用户会被归为冷启动用户，不产生推荐
 #  测试用例run     python RecItem.py '00b19313fb62cfc5797612dd8460bccb'    in terminal
