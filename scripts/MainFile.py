@@ -13,7 +13,7 @@ from utils.recall import topn_evaluate
 
 
 
-def main(neg_ratio, min_item, seq_max_len, load, batch_size, user_params, item_params, 
+def main(ProjectFolderDir, DataDir, neg_ratio, min_item, seq_max_len, load, batch_size, user_params, item_params, 
             temperature, learning_rate, weight_decay, optimizer_fn, epoch, topk):
     import time
     start_time = str(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
@@ -100,6 +100,8 @@ if __name__ == '__main__':
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
     main(
+        ProjectFolderDir = '',
+        DataDir = '',
         neg_ratio= 3 ,
         min_item= 5 ,
         seq_max_len= 10 ,
