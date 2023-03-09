@@ -21,7 +21,7 @@ def main(ProjectFolderDir, neg_ratio, min_item, seq_max_len, load, batch_size, u
     print('Start:', start_time)
     save_dir = ProjectFolderDir  # 项目文件夹路径(推荐)
     
-    model_dir = save_dir + '/model/saved/'    # 模型及embedding向量保存路径
+    model_dir = save_dir + 'temp/'    # 模型及embedding向量保存路径
     datapath = save_dir + '/data/processed/ZJULibrary2013_2019.csv'
     user_features = ['PATRON_ID', 'STUDENT_GRADE', 'PATRON_DEPT', 'PATRON_TYPE']
     # 用户侧特征       用户id          年级            学生学院       学生类型
