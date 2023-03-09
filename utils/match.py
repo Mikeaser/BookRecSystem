@@ -8,12 +8,12 @@ class Annoy(object):
         self._search_k = search_k
         self._metric = metric
 
-    def fit(self, X):
+    def fit(self, X, model_dir):
         self._annoy = AnnoyIndex(X.shape[1], metric=self._metric)
         for i, x in enumerate(X):
             self._annoy.add_item(i, x.tolist())
         self._annoy.build(self._n_trees, n_jobs=-1)
-        self._annoy.save("../temp/item.ann.index")
+        self._annoy.save(model_dir + "item.ann.index")
 
     def set_query_arguments(self, search_k):
         self._search_k = search_k

@@ -5,7 +5,7 @@ def topn_evaluate(trainer, user_dl, user_set, item_dl, item_set, user_col, item_
     user_embedding = trainer.inference_embedding(model=model, mode="user", data_loader=user_dl, model_path=model_dir)
     item_embedding = trainer.inference_embedding(model=model, mode="item", data_loader=item_dl, model_path=model_dir)
     annoy = Annoy(n_trees=100)
-    annoy.fit(item_embedding)
+    annoy.fit(item_embedding, model_dir)
     n_total = 0
     n_hit = 0
     for true_item_list, user_emb in zip(user_set['pos_list'], user_embedding):
