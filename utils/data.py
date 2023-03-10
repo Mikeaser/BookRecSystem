@@ -52,7 +52,7 @@ class datapretreat(object):
         self.item_col = item_col
 
     def data_load(self):
-        data = pd.read_csv(self.datapath, encoding='utf8', dtype=str, nrows= 10000)
+        data = pd.read_csv(self.datapath, encoding='utf8', dtype=str, nrows= 1000000)
         data[self.time]=data[self.time].astype(int)
         return data[self.features+[self.time]]
 

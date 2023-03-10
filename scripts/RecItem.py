@@ -7,10 +7,11 @@ from utils.match import Annoy
 import numpy as np
 import argparse
 from annoy import AnnoyIndex
+import random
 
 
 #  部分观看书本不足的用户会被归为冷启动用户，不产生推荐
-#  测试用例run     python ./scripts/RecItem.py '00b19313fb62cfc5797612dd8460bccb'    in terminal
+#  测试用例run     python ./scripts/RecItem.py '00b19313fb62cfc5797612dd84bccb'    in terminal
 def Recommend(ProjectFolderDir, InputUser):
     raw_id_map = np.load(ProjectFolderDir + 'data/processed/raw_id_maps.npy', allow_pickle=True)
     user_map = raw_id_map[0]
@@ -35,18 +36,21 @@ def Recommend(ProjectFolderDir, InputUser):
     annoy.load(ProjectFolderDir + "temp/item.ann.index")
 
     item_set, user_set, x_train, y_train, x_val, y_val, x_test, y_test = np.load(
-        ProjectFolderDir+'data/saved/data_process.npy', allow_pickle=True)
-    UserIndex = user_set['PATRON_ID'].tolist().index(UserLabel)
-    UserEmdedding = user_embeddings[UserIndex]
-
+        ProjectFolderDir+'data/processed/data_process.npy', allow_pickle=True)
     topk = 100
-    items_idx = annoy.get_nns_by_vector(UserEmdedding.tolist(), n=topk, search_k = -1)
-    # items_idx, items_scores = annoy.query(v=UserEmdedding, n=topk)
-    ItemLabel = item_set['ITEM_ID'][items_idx].tolist()
+    try:
+        UserIndex = user_set['PATRON_ID'].tolist().index(UserLabel)
+    except ValueError:  # 用户可能被当作冷启动用户删除，或者根本不存在与名单之中
+        RecItem = random.sample(list(item_map.values()), topk)
+    else:
+        UserEmdedding = user_embeddings[UserIndex]
+        items_idx = annoy.get_nns_by_vector(UserEmdedding.tolist(), n=topk, search_k = -1)
+        # items_idx, items_scores = annoy.query(v=UserEmdedding, n=topk)
+        ItemLabel = item_set['ITEM_ID'][items_idx].tolist()
 
-    RecItem = []
-    for i in ItemLabel:
-        RecItem.append(item_map[i])
+        RecItem = []
+        for i in ItemLabel:
+            RecItem.append(item_map[i])
     return RecItem
 
 

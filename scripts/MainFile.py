@@ -15,6 +15,11 @@ from utils.recall import topn_evaluate
 
 def main(ProjectFolderDir, neg_ratio, min_item, seq_max_len, load, batch_size, user_params, item_params, 
             temperature, learning_rate, weight_decay, optimizer_fn, epoch, topk):
+    seed = 2023
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
     import time
     start_time = str(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
     logfile_name = str(time.strftime('%Y_%m_%d_%H_%M_%S',time.localtime(time.time())))
@@ -94,11 +99,6 @@ def main(ProjectFolderDir, neg_ratio, min_item, seq_max_len, load, batch_size, u
     return 0
 
 if __name__ == '__main__':
-    seed = 2023
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
     main(
         ProjectFolderDir = '',
         neg_ratio= 3 ,
