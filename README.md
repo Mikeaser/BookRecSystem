@@ -8,7 +8,7 @@
 
 ## 运行说明
 
-教程位于项目目录下的文件BookRecTutorial.ipynb当中
+**教程位于项目目录下的文件BookRecTutorial.ipynb当中**
 
 环境要求位于项目目录下的目录Requirements中
 
@@ -27,7 +27,3 @@ conda install --torchrec --file ./requirements/requirements_win64.txt
 annoy包需要系统带有C++编译环境，终端执行pip install annoy
 
 实验所用的torch版本大于等于1.11.0均可，cuda大于等于11.3，更低的版本未经测试。
-
-## 目录结构
-
-项目的目录结构大致如图所示：
