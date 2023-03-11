@@ -121,6 +121,7 @@ class datapretreat(object):
             y_test = x_test.pop("label")
 
             np.save(os.path.join(self.savepath, "data_process.npy"), np.array((item_set, user_set, x_train, y_train, x_val, y_val, x_test, y_test), dtype=object))
+            np.save(os.path.join(self.savepath, "item_user.npy"), np.array((item_set, user_set), dtype=object))
             print('train set, validation set and test set have saved in data/processed/data_process.npy')
 
         return item_set, user_set, x_train, y_train, x_val, y_val, x_test, y_test

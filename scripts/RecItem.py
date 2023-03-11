@@ -35,8 +35,8 @@ def Recommend(ProjectFolderDir, InputUser):
     annoy = AnnoyIndex(item_embeddings.shape[1], metric='angular')
     annoy.load(ProjectFolderDir + "temp/item.ann.index")
 
-    item_set, user_set, x_train, y_train, x_val, y_val, x_test, y_test = np.load(
-        ProjectFolderDir+'data/processed/data_process.npy', allow_pickle=True)
+    item_set, user_set = np.load(
+        ProjectFolderDir+'data/processed/item_user.npy', allow_pickle=True)
     topk = 100
     try:
         UserIndex = user_set['PATRON_ID'].tolist().index(UserLabel)
