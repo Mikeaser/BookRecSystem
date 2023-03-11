@@ -27,3 +27,5 @@ conda install --torchrec --file ./requirements/requirements_win64.txt
 annoy包需要系统带有C++编译环境，终端执行pip install annoy
 
 实验所用的torch版本大于等于1.11.0均可，cuda大于等于11.3，更低的版本未经测试。
+
+实验时请确保机器配置了深度学习环境，即cuda、cudnn
